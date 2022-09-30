@@ -1,4 +1,3 @@
-import * as SQLite from 'expo-sqlite';
 import DataBase from './DBService';
 
 const DB_EXEC = DataBase.getConnection();

@@ -1,14 +1,17 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-import {AuthContext} from "../contexts/AuthProvider";
+import { AuthContext } from "../contexts/AuthProvider";
 
 const Home = () => {
-  const { email } = useContext(AuthContext);
-
+  // INSERT CONTAINER / BODY / HEADER
+  const { user } = useContext(AuthContext);
+  
+  // TESTS CONTEXTS
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 30}}>{email}</Text>
+      <Text style={{ fontSize: 30 }}>{user.email}</Text>
+      <Text style={{ fontSize: 30}}>{user.status}</Text>
     </View>
   )
 }

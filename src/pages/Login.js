@@ -1,26 +1,25 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useContext, useState } from "react";
+import {  StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, TextInput, Text } from "react-native-paper";
+
+import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../contexts/AuthProvider";
 
 import Container from "../components/Container";
 import Body from "../components/Body";
 import Input from "../components/Input";
 
-import { useNavigation } from "@react-navigation/native";
-
 const Login = () => {
 
+  const { login } = useContext(AuthContext)
   const navigation = useNavigation();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   
   // DATA
   const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert("You need to provide your email and password");
-    }
-    navigation.navigate('Home');
-    // SELECT TABLE USER
+    login(email, password); // Function in AuthContext
   }
 
   return (
@@ -35,7 +34,7 @@ const Login = () => {
         <Input
           label='Password'
           value={password}
-          onChangeText={setPassword}
+          onChangeText={setPassword}        
           //secureTextEntry={false} // Hide Password
           //autoCorrect={false}
           right={<TextInput.Icon icon="lock" />}
