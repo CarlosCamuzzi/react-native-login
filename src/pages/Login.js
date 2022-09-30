@@ -19,6 +19,7 @@ const Login = () => {
     if (!email || !password) {
       Alert.alert("You need to provide your email and password");
     }
+    navigation.navigate('Home');
     // SELECT TABLE USER
   }
 
