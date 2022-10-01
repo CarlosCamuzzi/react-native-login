@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import {  StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, TextInput, Text } from "react-native-paper";
 
 import { useNavigation } from "@react-navigation/native";
@@ -16,7 +16,7 @@ const Login = () => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  
+
   // DATA
   const handleLogin = () => {
     login(email, password); // Function in AuthContext
@@ -28,40 +28,56 @@ const Login = () => {
         <Input
           label='E-mail'
           value={email}
-          onChangeText={setEmail}          
+          onChangeText={setEmail}
           right={<TextInput.Icon icon="email" />}
         />
         <Input
           label='Password'
           value={password}
-          onChangeText={setPassword}        
+          onChangeText={setPassword}
           //secureTextEntry={false} // Hide Password
           //autoCorrect={false}
           right={<TextInput.Icon icon="lock" />}
           keyboardType='decimal-pad'
         />
         <Button
-          style={styles.button}
+          style={styles.buttonLogin}
           mode='contained'
           onPress={() => handleLogin()} // DATA
         >
           <Text style={styles.text}>LOGIN</Text>
         </Button>
+
+
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={textSignUp}>SIGN UP</Text>
+          <Button
+            style={styles.buttonSignup}
+            mode='outlined'
+          >
+            <Text style={textSignUp}>SIGN UP</Text>
+          </Button>
         </TouchableOpacity>
+
+        {/* <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <Text style={textSignUp}>SIGN UP</Text>
+        </TouchableOpacity> */}
       </Body>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
+  buttonLogin: {
     width: 250,
     height: 45,
     backgroundColor: '#58692E',
     marginTop: 45,
-    marginBottom: 60,
+    marginBottom: 70,
+    alignSelf: 'center',
+  },
+  buttonSignup: {
+    width: 250,
+    height: 45,
     alignSelf: 'center',
   },
   text: {
