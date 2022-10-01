@@ -30,8 +30,8 @@ const Home = () => {
       onIndexChange={setIndex}
       renderScene={renderScene}
       barStyle={styles.container}
-      activeColor={'#FDD282'}
-      inactiveColor={'#D56B1D'}
+       activeColor={'#FDD282'}      
+       //inactiveColor={'#D56B1D'}
       //getColor={() => Account}
      // getLabelText={route => {route.title}}
     />
