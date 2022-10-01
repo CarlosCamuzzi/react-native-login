@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 
-import Main from './src/navigations/Main';
+import Routes from './src/navigations/Routes';
 import AuthProvider from './src/contexts/AuthProvider';
 import StyleProvider from './src/contexts/StyleProvider';
 
@@ -10,7 +10,7 @@ const App = () => {
     <NavigationContainer>
       <StyleProvider>
         <AuthProvider>
-          <Main />
+          <Routes />
         </AuthProvider>
       </StyleProvider>
     </NavigationContainer>

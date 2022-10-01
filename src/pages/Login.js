@@ -95,10 +95,3 @@ const textSignUp = StyleSheet.compose(styles.text, styles.textSign);
 
 export default Login;
 
-/*
- #D56B1D - ABOBORA
- #A0AA60 - VERDE MEDIO
- #FDD282 - AMARELO CLARO
- #BFBF5E - VERDE CLARO
- #58692E - VERDE ESCURO
-*/
