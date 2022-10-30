@@ -24,16 +24,23 @@ const Home = () => {
     account: Account,
   });
 
+
   return (
-    <BottomNavigation      
+    <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
       barStyle={styles.container}
-       activeColor={'#FDD282'}      
-       //inactiveColor={'#D56B1D'}
-      //getColor={() => Account}
-     // getLabelText={route => {route.title}}
+      
+
+      //activeColor={'#FDD282'}
+      //getColor={() => {color: 'red'}} // not
+     // renderLabel={() => <Text>dsadadasx</Text>}
+      //labeled={false} // Exibir ou não nomes
+      //inactiveColor={'#D56B1D'}
+      //getColor={() => ())}
+      //getLabelText={() => <Text>dsadadasx</Text>} //ok
+      
     />
     // TESTS CONTEXT
     // <View style={styles.container}>
@@ -46,7 +53,8 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#58692E',    
+    backgroundColor: '#BFBF5E',
+    padding: 3,    
   }
 })
 

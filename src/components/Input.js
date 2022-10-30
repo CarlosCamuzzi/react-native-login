@@ -2,10 +2,8 @@ import React, { useContext } from "react";
 import { StyleSheet } from 'react-native';
 import { TextInput } from "react-native-paper";
 
-import { StyleContext } from "../contexts/StyleProvider";
 
 const Input = (props) => {
-  const {input } = useContext(StyleContext)
 
   return (
     <TextInput

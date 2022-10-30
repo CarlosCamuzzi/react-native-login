@@ -11,14 +11,21 @@ import Input from "../components/Input";
 
 const Login = () => {
 
-  const { login } = useContext(AuthContext)
   const navigation = useNavigation();
+  const { login } = useContext(AuthContext)
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  // DATA
+  const [missInfo, setMissInfo] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
+
+
   const handleLogin = () => {
+    if (!email || password)
+      setMissInfo(true);
+
+    // DATA
     login(email, password); // Function in AuthContext
   }
 
@@ -29,16 +36,26 @@ const Login = () => {
           label='E-mail'
           value={email}
           onChangeText={setEmail}
+          error={missInfo && !email ? true : false}
           right={<TextInput.Icon icon="email" />}
         />
         <Input
           label='Password'
           value={password}
           onChangeText={setPassword}
-          //secureTextEntry={false} // Hide Password
-          //autoCorrect={false}
-          right={<TextInput.Icon icon="lock" />}
+          secureTextEntry={hidePassword}
+          autoCorrect={false}
+          //activeUnderlineColor={'#ffa224'}
+          error={missInfo && !password ? true : false}
           keyboardType='decimal-pad'
+          right={
+            <TextInput.Icon
+              onPress={() => hidePassword
+                ? setHidePassword(false)
+                : setHidePassword(true)
+              }
+              icon={hidePassword ? "eye-off" : "eye"} />
+          }
         />
         <Button
           style={styles.buttonLogin}
@@ -57,10 +74,6 @@ const Login = () => {
             <Text style={textSignUp}>SIGN UP</Text>
           </Button>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={textSignUp}>SIGN UP</Text>
-        </TouchableOpacity> */}
       </Body>
     </Container>
   );
