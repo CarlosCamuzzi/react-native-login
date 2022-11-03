@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, Alert } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Snackbar } from "react-native-paper";
 
 import Container from "../components/Container";
 import Body from "../components/Body";
@@ -16,34 +16,39 @@ const Signup = () => {
 
   const navigation = useNavigation();
 
+  // User Info
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
 
-  const [missInfo, setMissInfo] = useState(false);
+  // Password Icons
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordCheck, setHidePasswordCheck] = useState(true);
-  
-  
+
+  // Miss Info Form
+  const [missInfo, setMissInfo] = useState(false);
+
+  // SnackBar
+  const [visible, setVisible] = useState(false);
+  const onToggleSnackBar = () => setVisible(!visible);
+  const onDismissSnackBar = () => setVisible(false);
+
   useEffect(() => {
     DataBase.getConnection();
   }, [])
 
-  const handleSignUp = async () => {
+  const handleSignUp = () => {
     if (!name || !email || !password || !passwordCheck) {
-      Alert.alert("You need to fill in all the fields");
       setMissInfo(true);
+      onToggleSnackBar(); // Snackbar
     } else if (password == passwordCheck) {
       const user = {
         name: name,
         email: email,
         password: password,
       }
-      //console.log('handle sign ok'); // Test OK
-      //console.log(user);  // Test OK
-      await insert(user).then().catch(); // Test ok
-      //await select(user).then(); // Test ok
+      insert(user).then().catch(); // Test ok     
       navigation.navigate('Login');
     } else {
       Alert.alert("Password does not match");
@@ -89,7 +94,7 @@ const Signup = () => {
           label='Password Check'
           value={passwordCheck}
           onChangeText={setPasswordCheck}
-          secureTextEntry={hidePasswordCheck} // Hide Password
+          secureTextEntry={hidePasswordCheck}
           autoCorrect={false}
           keyboardType='decimal-pad'
           error={missInfo && !passwordCheck ? true : false}
@@ -110,11 +115,20 @@ const Signup = () => {
           <Text style={styles.text}>SIGN UP</Text>
         </Button>
 
+        <Snackbar
+          visible={visible}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: 'Ok',
+          }}>
+          You need to fill in all the fields
+        </Snackbar>
       </Body>
     </Container>
   );
 }
 const styles = StyleSheet.create({
+  // Button
   button: {
     width: 250,
     height: 45,

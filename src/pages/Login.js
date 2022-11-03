@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Button, TextInput, Text } from "react-native-paper";
+import { Button, TextInput, Text, Snackbar } from "react-native-paper";
 
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -20,13 +20,19 @@ const Login = () => {
   const [missInfo, setMissInfo] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
+  // SnackBar
+  const [visible, setVisible] = useState(false);
+  const onToggleSnackBar = () => setVisible(!visible);
+  const onDismissSnackBar = () => setVisible(false);
 
   const handleLogin = () => {
-    if (!email || password)
-      setMissInfo(true);
-
-    // DATA
-    login(email, password); // Function in AuthContext
+    if (!email || !password) {
+      setMissInfo(true);  
+      onToggleSnackBar(); // Snackbar
+    } else {
+      // DATA
+      login(email, password); // Function in AuthContext
+    }
   }
 
   return (
@@ -65,7 +71,6 @@ const Login = () => {
           <Text style={styles.text}>LOGIN</Text>
         </Button>
 
-
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
           <Button
             style={styles.buttonSignup}
@@ -74,6 +79,15 @@ const Login = () => {
             <Text style={textSignUp}>SIGN UP</Text>
           </Button>
         </TouchableOpacity>
+
+        <Snackbar
+          visible={visible}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: 'Ok',            
+          }}>
+          You need to provide your email and password.
+        </Snackbar>
       </Body>
     </Container>
   );
